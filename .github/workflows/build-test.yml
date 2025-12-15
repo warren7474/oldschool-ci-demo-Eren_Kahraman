@@ -18,11 +18,11 @@ jobs:
 
       - name: Docker-Image bauen
         run: |
-          docker build -t oldschool-demo-image-eren_kahraman:latest .
+          docker build -t oldschool-demo-image-eren-kahraman:latest .
 
       - name: Container starten & testen
         run: |
-          output=$(docker run --rm oldschool-demo-image-eren_kahraman:latest)
+          output=$(docker run --rm oldschool-demo-image-eren-kahraman:latest)
           echo "$output"
           
           if [ "$output" != "OldSchool GmbH – automatischer Build erfolgreich! (Eren.K)" ]; then
