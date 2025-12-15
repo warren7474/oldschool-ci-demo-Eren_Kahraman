@@ -1,0 +1,37 @@
+name: Build and Test Docker Image
+
+on:
+  push:
+    branches:
+    #Egal in welchen Branch dafür *
+      - '*'      
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Docker setup (Buildx)
+        uses: docker/setup-buildx-action@v3
+
+      - name: Docker-Image bauen
+        run: |
+          docker build -t oldschool-demo-image-eren_Kahraman:latest .
+
+      - name: Container starten & testen
+        run: |
+          output=$(docker run --rm oldschool-demo-image-eren_Kahraman:latest)
+          echo "$output"
+          
+          if [ "$output" != "OldSchool GmbH – automatischer Build erfolgreich! (Eren.K)" ]; then
+            echo "❌ Test fehlgeschlagen! Erwartet war:"
+            echo "OldSchool GmbH – automatischer Build erfolgreich! (Eren.K)"
+            echo "Aber erhalten wurde:"
+            echo "$output"
+            exit 1
+          else
+            echo "✅ Test erfolgreich!"
+          fi
+    
