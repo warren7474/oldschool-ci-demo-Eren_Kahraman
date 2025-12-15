@@ -1,2 +1,3 @@
-		#!/bin/bash
-echo "OldSchool GmbH –  automatischer Build erfolgreich! (Eren.K)"
+#!/bin/sh
+echo "OldSchool GmbH – automatischer Build erfolgreich! (Eren.K)"
+
